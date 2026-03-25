@@ -18,20 +18,34 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <script>
-        // 加上這行 console 檢查有沒有跑進來
-        console.log("Vue 腳本開始執行");
-
         const { createApp, ref } = Vue;
 
         createApp({
             setup() {
-                const count = ref(100); // 初始值給 100，方便一眼看出有沒有抓到
-                const plus = () => { count.value++; };
+                const count = ref(100);
+                const title = ref("Vue 修正版"); // 補上 title 變數，不然 <h1> 會空白
 
-                return { count, plus };
+                // 增加邏輯
+                const plus = () => {
+                    count.value++;
+                };
+
+                // 減少邏輯 (補上這段)
+                const minus = () => {
+                    // 如果你不想讓數字變成負數，可以加個判斷
+                    if (count.value > 0) {
+                        count.value--;
+                    }
+                };
+
+                // 記得把 minus 也丟出去給 HTML 用
+                return {
+                    count,
+                    title,
+                    plus,
+                    minus
+                };
             }
         }).mount('#app');
-
-        console.log("Vue 掛載完成");
     </script>
 }
