@@ -1,8 +1,37 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Vue 修正版";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div id="app">
+    <div class="card p-4 text-center">
+        <h1>{{ title }}</h1>
+        <h2 class="display-1">{{ count }}</h2>
+
+        <div class="mt-3">
+            <button class="btn btn-danger" @@click="minus">- 減少</button>
+            <button class="btn btn-success" @@click="plus">+ 增加</button>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+        // 加上這行 console 檢查有沒有跑進來
+        console.log("Vue 腳本開始執行");
+
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const count = ref(100); // 初始值給 100，方便一眼看出有沒有抓到
+                const plus = () => { count.value++; };
+
+                return { count, plus };
+            }
+        }).mount('#app');
+
+        console.log("Vue 掛載完成");
+    </script>
+}
