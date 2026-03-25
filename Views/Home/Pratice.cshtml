@@ -3,7 +3,7 @@
     Layout = "_Layout";
 }
 
-<div id="app">
+<div id="app" v-cloak>
     <div class="card p-4 text-center">
         <h1>{{ title }}</h1>
     </div>
@@ -17,7 +17,7 @@
 
         createApp({
             setup() {
-                const title = ref("練習頁面"); // 補上 title 變數，不然 <h1> 會空白
+                const title = ref("練習頁面"); 
 
                 return {
                     title,
