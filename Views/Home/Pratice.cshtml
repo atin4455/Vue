@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Vue 修正版";
+    ViewData["Title"] = "Vue ESM 模式";
     Layout = "_Layout";
 }
 
@@ -10,16 +10,13 @@
 </div>
 
 @section Scripts {
-    <script>
-        const { createApp, ref } = Vue;
+    <script type="module">
+        import { createApp, ref } from 'vue'; // 直接使用別名
 
         createApp({
             setup() {
-                const title = ref("練習頁面"); 
-
-                return {
-                    title,
-                };
+                const title = ref("這是從 Layout 統一管理的 Vue");
+                return { title };
             }
         }).mount('#app');
     </script>
