@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    @* 頁首 *@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -18,15 +19,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Pratice">Pratice</a>
-                        </li>  
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Guestbook" asp-action="Index">Message Board</a>
                         </li>
@@ -40,20 +32,22 @@
             @RenderBody()
         </main>
     </div>
-
+    @* 頁尾 *@
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2026 - Vue - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - Vue
         </div>
     </footer>
+    @* script *@
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script type="importmap"> @* 使用ESM模式 *@
+    @* 使用ESM模式 *@
+    <script type="importmap">
         {
             "imports": {
                 "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
             }
         }
-    </script> 
+    </script>
 
 
     @await RenderSectionAsync("Scripts", required: false)
