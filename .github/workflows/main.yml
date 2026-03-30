@@ -1,16 +1,32 @@
 name: GitHub Actions Demo
-run-name: GitHub Actions Demo
+run-name: Deploying to IIS
 
-# 觸發此 action 的時機
 on:
   push:
-    branches:  # 只要有任何一個 commit 被 push，就會觸發此 action
-      '*'
-  workflow_dispatch:  # 可以手動執行此 action
+    branches:
+      - '*'
+  workflow_dispatch:
 
-# 預先定義此 action 要幹嘛
 jobs:
-  demo:
-    runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: windows-latest  # 必須使用 Windows 才能執行 IIS 相關指令
     steps:
-      - run: echo '執行成功'
+      - name: 1. 檢出程式碼
+        uses: actions/checkout@v4
+
+      - name: 2. 安裝 .NET 環境
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x' # 根據你的專案版本調整
+
+      - name: 3. 建立目標資料夾 (模擬 IIS 路徑)
+        run: |
+          New-Item -Path "C:\inetpub\wwwroot\Vue" -ItemType Directory -Force
+        shell: pwsh
+
+      - name: 4. 執行 PowerShell 腳本
+        shell: pwsh
+        run: |
+          # 如果腳本權限被擋，可以在這裡暫時放寬
+          Set-ExecutionPolicy Bypass -Scope Process -Force
+          ./deploy.ps1 "C:\inetpub\wwwroot\Vue"
